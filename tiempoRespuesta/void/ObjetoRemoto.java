@@ -7,6 +7,7 @@ public class ObjetoRemoto extends UnicastRemoteObject implements InterfaceRemota
 
 	public ObjetoRemoto() throws RemoteException {
 		super();
+		this.data = null;
 	}
 
 	public byte[] getData() {
