@@ -11,6 +11,7 @@ public class Servidor {
 		try {
 			// Se publica el objeto remoto
 			InterfaceRemota objetoRemoto = new ObjetoRemoto();
+			((ObjetoRemoto) objetoRemoto).setData(null);
 			Naming.rebind("//" + args[0] + "/ObjetoRemoto", objetoRemoto);
 		} catch (Exception e) {
 			e.printStackTrace();

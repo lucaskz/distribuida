@@ -13,11 +13,13 @@ public class Cliente {
 			if (System.getSecurityManager() == null) {
 				System.setSecurityManager(new RMISecurityManager());
 			}
-			long start = System.currentTimeMillis();
+			
 			InterfaceRemota objetoRemoto = (InterfaceRemota) Naming.lookup("//"+ args[0] +"/ObjetoRemoto");
 
+			long start = System.currentTimeMillis();
+			byte[] data =  objetoRemoto.getData();
 			long end = System.currentTimeMillis();
-			System.out.println("Tiempo de respuesta " + (end - start) + " ms. long : " + objetoRemoto.getData().length);
+			System.out.println("Tiempo de respuesta " + (end - start) + " ms. " + (data != null ? ("Lon. :" + data.length ) : "" ));
 
 		} catch (Exception e) {
 			e.printStackTrace();

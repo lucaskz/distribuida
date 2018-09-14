@@ -1,8 +1,4 @@
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-
+import java.util.concurrent.*;
 /**
  */
 public class Cliente {
@@ -12,19 +8,18 @@ public class Cliente {
 	 */
 	public Cliente() {
 		ExecutorService executor = Executors.newSingleThreadExecutor();
+		Future future = executor.submit(new RunnableClient());
 		try {
-			
-			//RunnableClient clientTask = new RunnableClient();
-			Future future = executor.submit(new RunnableClient());
 			Object data = future.get(5, TimeUnit.SECONDS);
-			//executor.in
-			
-			
-		} catch (Exception e) {
+		} 
+		catch (TimeoutException e){
 			e.printStackTrace();
-			executor.shutdown();
+			future.cancel(true);
+			System.exit(0);
 		}
-		executor.shutdown();
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
